@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Book implements Comparable<Book>{
+public class Book implements Comparable<Book>,Serializable{
 	
 	private String isbn;
 	private String title;
@@ -9,7 +10,7 @@ public class Book implements Comparable<Book>{
 	private ArrayList<Author> author = new ArrayList<Author>();
 
 	
-	public Book(String isbn, String title, int edition, double price, String name){
+	public Book(String title, String isbn, int edition, double price, String name){
 		this.isbn = isbn;
 		this.title = title;
 		this.edition = edition;
@@ -52,4 +53,6 @@ public class Book implements Comparable<Book>{
 			return 1;
 	}
 	
+    private static final long serialVersionUID = 1L;
+
 }

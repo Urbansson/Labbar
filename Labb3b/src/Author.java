@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Author {
+public class Author implements Serializable  {
 
 	final private String name;
 	
@@ -11,4 +12,6 @@ public class Author {
 		return name;
 	}
 	
+    private static final long serialVersionUID = 1L;
+
 }
