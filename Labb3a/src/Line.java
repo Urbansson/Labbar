@@ -21,21 +21,11 @@ public class Line extends Shape{
 		return y2;
 	}
 	
-	
-	public void move(){
-		super.move();
-		x2 += super.getDX();
-		y2 +=super.getDY();
-		constrain(); 
-	}
-	
-	
 	public void paint(Graphics g) {	
 		g.setColor(super.getColor());
-		g.drawLine((int)super.getX(), (int)super.getY(), (int)x2, (int)y2);
+		g.drawLine((int)super.getX(), (int)super.getY(), (int)(super.getX()+x2), (int)(super.getY()+y2));
 	}
 
-	
 	protected void constrain(){
 		Rectangle box = super.getBoundingBox();
 		
@@ -44,10 +34,9 @@ public class Line extends Shape{
 		double y1 = y0 + box.height;
 
 		// If outside box, change direction
-		if(x2 < x0 || super.getX() < x0) super.setDX(Math.abs(super.getDX()));
-		if(x2 > x1 || super.getX() > x1) super.setDX(-Math.abs(super.getDX()));
-		if(y2 < y0 || super.getY() < y0) super.setDY(Math.abs(super.getDY()));
-		if(y2 > y1 || super.getX() > y1) super.setDY(-Math.abs(super.getDY()));
+		if(super.getX() < x0) super.setDX(Math.abs(super.getDX()));
+		if(super.getX()+x2 > x1) super.setDX(-Math.abs(super.getDX()));
+		if(super.getY() < y0) super.setDY(Math.abs(super.getDY()));
+		if(super.getY()+y2 > y1) super.setDY(-Math.abs(super.getDY()));
 	} 
-	
 }
