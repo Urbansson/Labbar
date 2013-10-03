@@ -10,7 +10,6 @@ public class Deck {
 
 	
 	private ArrayList<Card> Cards = new ArrayList<Card>();
-	private int numberOfCards;
 	
 	/** The constructor fills the deck with 52 cards
 	 */
@@ -21,16 +20,20 @@ public class Deck {
 	/** Returns the number of cards in the deck
 	 */
 	public int getNoOfCars(){
-		return numberOfCards;
+		return Cards.size();
 	}
 	
 	/** Deals out the card on top in the deck
 	 */
-	public Card dealCard(){
+	public Card dealCard() throws NoSuchCardException{
 		Card cardToBeDealed;
-		cardToBeDealed = Cards.remove(0);
-		numberOfCards--;
-		return cardToBeDealed;
+		if(Cards.size() == 0){
+			throw new NoSuchCardException("No cards in Deck to be Dealed");
+		}
+		else{
+			cardToBeDealed = Cards.remove(0);
+			return cardToBeDealed;
+		}
 	}
 	
 	/** Shuffles the deck
@@ -45,7 +48,6 @@ public class Deck {
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
             	Cards.add(new Card(rank, suit));
-            	numberOfCards++;
             }
         }
 	}
@@ -58,5 +60,13 @@ public class Deck {
 			tempString += tempCard.toString() + "\n";
 		}	
 		return tempString;
+	}
+	
+	public void sortByRank(){
+	    Collections.sort(Cards, new CompareRank());
+	}
+	
+	public void sortBySuit(){
+	    Collections.sort(Cards, new CompareSuit());
 	}
 }

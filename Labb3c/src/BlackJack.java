@@ -97,16 +97,18 @@ public class BlackJack {
 
 		for(int i = 0; i < Player.size(); i++){
 
-			if(comp.bustStatus()){
+			if(comp.bustStatus() && !Player.get(i).bustStatus()){
 				System.out.println("Computer Bust!");
 				System.out.println("You Win!");
 				Player.get(i).addPoint();
-			} else {
+			} else if(Player.get(i).bustStatus()){
+				System.out.println("Player " +(1+i)+ " BUSTS!");
+			} else{
 				if(Player.get(i).getTotalValue() > comp.getTotalValue() && !Player.get(i).bustStatus()){
 					System.out.println("Player " +(1+i)+ " Wins!");
 					Player.get(i).addPoint();
-				}else if(Player.get(i).bustStatus()){
-					System.out.println("Player " +(1+i)+ " BUSTS!");
+				}else if(Player.get(i).getTotalValue() < comp.getTotalValue() && !Player.get(i).bustStatus()){
+					System.out.println("Computer Wins!");
 				}
 					
 			}
@@ -182,7 +184,14 @@ public class BlackJack {
 	 */
 	private void dealCards(Player player, int numberOfCards){
 		for(int i = 0; i < numberOfCards; i++){
-			player.addCardToHand(gameDeck.dealCard());
+			try{
+				player.addCardToHand(gameDeck.dealCard());
+			}
+			catch(NoSuchCardException e){
+				System.out.println("No cards In deck, adding a new deck to the game! ");
+					gameDeck.fill();
+					gameDeck.shuffleCards();
+			}
 	}
 		
 	}

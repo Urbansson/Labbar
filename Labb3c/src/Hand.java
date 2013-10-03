@@ -1,37 +1,35 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Hand {
 
 	private ArrayList<Card> Cards;
-	private int numberOfCards = 0;
 	
 	public Hand(){	
 		Cards = new ArrayList<Card>();
 	}
 	
 	public int getNoOfCards(){
-		return numberOfCards;
+		return Cards.size();
 	}
 
 	public void addCard(Card newCard){
 		Cards.add(newCard);
-		numberOfCards++;
 	}
 	
-	public Card getCard(int i){
-		if(i <= numberOfCards && i != 0)
+	public Card getCard(int i) throws NoSuchCardException{
+		if(i <= Cards.size() && i != 0)
 			return Cards.get(i-1);
 		else
-			return null;
+			throw new NoSuchCardException("Not a valid card request:" + i );
 	}
 	
-	public Card removeCard(int i){
-		if(i <= numberOfCards && i != 0){
-			numberOfCards--;
+	public Card removeCard(int i) throws NoSuchCardException{
+		if(i <= Cards.size() && i != 0){
 			return Cards.remove(i-1);
 		}
 		else
-			return null;
+			throw new NoSuchCardException("Not a valid card request:" + i );
 	}	
 	
 	public void clearHand(){
@@ -46,5 +44,13 @@ public class Hand {
 			tempString += tempCard.toString() + "\n";
 		}	
 		return tempString;
+	}
+	
+	public void sortByRank(){
+	    Collections.sort(Cards, new CompareRank());
+	}
+	
+	public void sortBySuit(){
+	    Collections.sort(Cards, new CompareSuit());
 	}
 }
