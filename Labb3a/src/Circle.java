@@ -8,6 +8,7 @@ public class Circle extends FillableShape
 	private double diameter;
 	
 	public Circle(double x, double y, double diameter, Color color){
+		//superklassens konstruktor med matchande parametrar kallas
 		super(x, y, color);
 		this.diameter = diameter;
 	}
@@ -16,6 +17,10 @@ public class Circle extends FillableShape
 		return diameter;
 	}
 
+	/**
+	 * Overridar paint metoden där vi kollar om vi valt att fylla cirkeln, då fyller vi den.
+	 * Här säger vi hur vi vill rita cirkeln/ovalen som vi sedan får rita ut i Bounce panel
+	 */
 	@Override
 	public void paint(Graphics g){
 		
@@ -27,6 +32,11 @@ public class Circle extends FillableShape
 		
 	}
 	
+	/**
+	 * Override constrain
+	 *  Den här metoden behåller cirkeln i spelboxen
+	 *  Den kommer att studsa på väggarna i motsatt riktning
+	 */
 	protected void constrain(){
 		Rectangle box = super.getBoundingBox();
 		

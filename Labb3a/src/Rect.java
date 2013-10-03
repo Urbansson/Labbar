@@ -8,6 +8,7 @@ public class Rect extends FillableShape
 	private double width, height;
 	
 	public Rect(double x, double y, double height, double width, Color color){
+		//superklassens konstruktor med matchande parametrar kallas, 
 		super(x, y, color);
 		this.height = height;
 		this.width = width;
@@ -21,6 +22,10 @@ public class Rect extends FillableShape
 		return height;
 	}
 
+	/**
+	 * Overridar paint metoden där vi kollar om vi valt att fylla rektangeln, då fyller vi den.
+	 * Här säger vi hur vi vill rita rektangeln som vi sedan får rita ut i Bounce panel
+	 */
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
@@ -31,7 +36,11 @@ public class Rect extends FillableShape
 		g.drawRect((int) super.getX(), (int) super.getY(),(int) width, (int) height);
 	}
 
-	
+	/**
+	 *  Override constrain
+	 *  Den här metoden behåller cirkeln i spelboxen
+	 *  Den kommer att studsa på väggarna i motsatt riktning
+	 */
 	protected void constrain(){
 		Rectangle box = super.getBoundingBox();
 		

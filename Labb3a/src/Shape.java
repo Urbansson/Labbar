@@ -14,48 +14,68 @@ abstract public class Shape {
 		this.color = color;
 	}
 
+	
 	public double getX(){ 
+		// Returnera position x
 		return x;
 	}
 
+	
 	public double getY(){ 
+		// returnera poistion y
 		return y; 
 	}
 
+	
 	public double getDX(){ 
+		// Returnera hastighet i X-led
 		return dx; 
 	}
 
+	
 	public double getDY() { 
+		// Returnerar hastighet i y-led
 		return dy;
 	}
 
-
+	
 	public void setDX(double dx){ 
+		// sätter hastigheten till dx i x-led
 		this.dx = dx;
 	}
 
+	
 	public void setDY(double dy) { 
+		// sätter hastigheten till dy i y-led
 		this.dy = dy; 
 	}
 
-	public Color getColor() { 
+	
+	public Color getColor() {
+		// Returnerar färgen
 		return color; 
 	}
 
+	
 	public Rectangle getBoundingBox(){
+		// Returnerar rektangeln box
 		return box; 
 	}
 
+	
 	public void setBoundingBox(Rectangle box){
+		// Sätter värden till rektangeln box
 		this.box = box;
 	} 
 
+	
 	public void setVelocity(double dx, double dy){
+		// Sätter hastigheten med dx och dy, hastigheterna i y och x-led
 		this.dx = dx; this.dy = dy;
 	}
 
-	/** Move this shape (dx, dy)
+	/** 
+	 * Rör på formen innanför constrainen, med hastigheten (dx, dy)
 	 */
 	public void move(){
 		x += dx;
@@ -63,8 +83,9 @@ abstract public class Shape {
 		constrain(); 
 	}
 
-	/** Keep this shape inside the bounding box.
-	 *  Override this method in sub classes.
+	/**
+	 * Hållen formen innanför en begränsade rutan
+	 *  Vi overridar metoden i våra subklasser
 	 */
 	protected void constrain(){
 

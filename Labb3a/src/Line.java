@@ -8,6 +8,7 @@ public class Line extends Shape{
 	
 	public Line(double x, double y, double x2, double y2, Color color )
 	{
+		//superklassens konstruktor med matchande parametrar kallas, som finns i Shape
 		super(x, y, color);
 		this.x2 = x2; 
 		this.y2 = y2;
@@ -26,6 +27,11 @@ public class Line extends Shape{
 		g.drawLine((int)super.getX(), (int)super.getY(), (int)(super.getX()+x2), (int)(super.getY()+y2));
 	}
 
+	/**
+	 *  Overridar constrain.
+	 *  Den här metoden behåller linjen i spelboxen
+	 *  Den kommer att studsa på väggarna i motsatt riktning
+	 */
 	protected void constrain(){
 		Rectangle box = super.getBoundingBox();
 		
@@ -33,7 +39,7 @@ public class Line extends Shape{
 		double x1 = x0 + box.width;
 		double y1 = y0 + box.height;
 
-		// If outside box, change direction
+		// Om den är utanförboxen, byt riktning
 		if(super.getX() < x0) super.setDX(Math.abs(super.getDX()));
 		if(super.getX()+x2 > x1) super.setDX(-Math.abs(super.getDX()));
 		if(super.getY() < y0) super.setDY(Math.abs(super.getDY()));
